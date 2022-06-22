@@ -34,7 +34,6 @@ const CartComponent = () => {
       ids = ids.toString()
       fetchCart(url,{ids});
     }
-    
     // console.log(result.cart);
   }, []);
   
