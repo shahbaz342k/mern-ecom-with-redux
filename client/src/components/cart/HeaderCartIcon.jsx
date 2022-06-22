@@ -8,7 +8,7 @@ function HeaderCartIcon() {
     
     const result = useSelector((state) => state.cart);
     console.log('cart state ', result)
-    let itemCount = result ? result.cart.totalItems : 0
+    let itemCount = result.cart ? result.cart.totalItems : 0
     console.log(' itemd count', itemCount)
     
   return (
