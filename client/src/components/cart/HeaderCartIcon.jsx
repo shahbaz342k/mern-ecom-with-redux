@@ -9,6 +9,7 @@ function HeaderCartIcon() {
     const result = useSelector((state) => state.cart);
     console.log('cart state ', result)
     let itemCount = result ? result.cart.totalItems : 0
+    console.log(' itemd count', itemCount)
     
   return (
     <>
@@ -18,7 +19,7 @@ function HeaderCartIcon() {
             } } />
             <span className='cartCount'>
                 {/* {cartCount()} */}
-                { itemCount ? itemCount : 0 }
+                { itemCount }
             </span>
         </div>
     </>

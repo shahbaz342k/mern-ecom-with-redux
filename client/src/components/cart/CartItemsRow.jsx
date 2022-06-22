@@ -34,6 +34,12 @@ const CartItemsRow = (props) => {
             setLoading(false)
           }
       }
+      const removeItem = (item) => {
+        if( window.confirm('Are you sure want to delete') ){
+          dispatch(removeFromCart(item))
+        }
+        
+      }
       const getQty = (_id) => {
         if( result.cart.items ){
           console.log('get qty ', result)
@@ -61,9 +67,7 @@ const CartItemsRow = (props) => {
         </div>
         {/* dispatch(updateCartQuantity(item,result.cart.items[item._id],'inc')) */}
         <div className='subTotal'>$ { getSubTotal(item._id,item.price) }</div>
-        <button className='btn btn-danger' onClick={()=>
-        dispatch(removeFromCart(item))
-        }>Remove</button>
+        <button className='btn btn-danger' onClick={()=> removeItem(item) }>Remove</button>
     </div>
   )
 }

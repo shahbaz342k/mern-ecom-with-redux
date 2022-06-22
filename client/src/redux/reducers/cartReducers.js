@@ -22,21 +22,21 @@ export const cartReducers = (state=INITIAL_STATE, action) => {
    
     switch (action.type) {
         case ADD_TO_CART:
-            // console.log('action: ',action)
+            console.log('action: ',action)
             return {
-                cart:[action.payload]
+                cart:{...action.payload}
             }
             break;
         case UPDATE_CART_QUANTITY:
             // console.log('update to cart in', action)
             return {
-                cart:[action.payload]
+                cart:{...action.payload}
             }
             break;
         case REMOVE_FROM_CART:
             // console.log('remove to cart in', action.data)
             return {
-                cart:[action.payload]
+                cart:{...action.payload}
             }
             break;
         default:

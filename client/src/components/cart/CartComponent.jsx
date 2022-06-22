@@ -28,14 +28,7 @@ const CartComponent = () => {
     
   } 
 
-  useEffect(() => {
-    if( result.cart.items ){
-      let ids = Object.keys(result.cart.items);
-      ids = ids.toString()
-      fetchCart(url,{ids});
-    }
-    // console.log(result.cart);
-  }, []);
+ 
   
   useEffect(() => {
     if( result.cart.items ){
@@ -49,35 +42,30 @@ const CartComponent = () => {
     // console.log(result.cart);
   }, [result.cart]);
 
-  
-
   const totalPrice = () => {
-    return 0;
+    // return 0;
     let total=0;
     let qty;
-    if( result.cart ){
-      // total = data.reduce(function (result, item) {
-      //   return result + ( item.price * result.cart.items[item._id] );
-      // }, 0);
-      total = data.map((item) =>{
-        if( result.cart.tems[item._id] ){
-          qty = result.cart.tems[item._id];
-        }
-        total += qty * item.price; 
-      });
-      // data.map( (item) => )
+    if(result.cart){
+      // console.log('total s: ', result.cart)
+      // console.log('daga : ', data)
+      data.map( (product) => {
+        qty = result.cart.items[product._id];
+        // console.log(qty)
+        total += qty * product.price;
+      })
+
     }
     return total;
    
   }
   
-  
-
   return (
     <div className='cartWrap'>
-      { result.cart.totalItems > 0 ? 
-        <div className='row'>
+      { result.cart.totalItems > 0 ?
+      <div className='row'>
           <div className='col-9'>
+          <h2>Cart</h2>
             <div className='cartItemBox'>
               <h6 className='boxTitle text-center'>Shopping Items</h6>
               {loading ? 'loading...' : data.map( (item) => <CartItemsRow item={item} key={item._id} /> ) }
@@ -96,13 +84,25 @@ const CartComponent = () => {
           <div className='col-3'>
             <h4>right</h4>
           </div>
-        </div>
-        :
-        <div className='emptyCart'>
-              <img src="/empty-cart.png" alt="" />
-              <h2>Cart Empty</h2>
+      </div>
+      :
+      <div className='emptyCart'>
+          <div className='container'>
+            <div className='col-12 m-auto'></div>
+            <img src="/empty-cart.png" alt="empty cart" style={
+              {
+                width:'400px',
+                marginRight:'auto',
+                marginLeft:'auto',
+                display:'block'
+
+              }
+            } />
+              <h2 className='text-center mt-4'>Cart Empty</h2>
           </div>
-        }
+             
+          </div>
+      }
     </div>
   )
 }
