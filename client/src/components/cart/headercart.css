@@ -1,0 +1,11 @@
+.cartCount {
+    position: absolute;
+    background: #6c88b1;
+    color: #fff;
+    padding: 0px 4px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-left: -4px;
+    margin-top: -8px;
+}

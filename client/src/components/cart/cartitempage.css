@@ -1,0 +1,26 @@
+.cartItemBox{
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+}
+.cartItems{
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 25px;
+}
+.cartQty{
+    padding-left: 10px;
+    padding-right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.qty{
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 4px;
+    outline: none;
+    text-align: center;
+    width: 60px;
+    height: 40px;
+}
