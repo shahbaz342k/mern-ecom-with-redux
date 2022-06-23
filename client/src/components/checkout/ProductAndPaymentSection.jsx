@@ -22,7 +22,7 @@ const ProductAndPaymentSection = (props) => {
         }
     }
     const stripeSelect = () => {
-        console.log('stripe select')
+        // console.log('stripe select')
         setPaymentSelect('stripe');
     }
     const codSelect = () => {

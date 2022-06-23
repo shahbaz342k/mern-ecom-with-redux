@@ -6,7 +6,7 @@
 // 2. Reducer must return the some value
 // 3. The reducer must have some inital value
 
-import { ADD_TO_CART, REMOVE_FROM_CART, UPDATE_CART_QUANTITY } from './../constants/cartConstants';
+import { ADD_TO_CART, CLEAR_CART, REMOVE_FROM_CART, UPDATE_CART_QUANTITY } from './../constants/cartConstants';
 
 let INITIAL_STATE = {
     cart:[]
@@ -22,7 +22,7 @@ export const cartReducers = (state=INITIAL_STATE, action) => {
    
     switch (action.type) {
         case ADD_TO_CART:
-            console.log('action: ',action)
+            // console.log('action: ',action)
             return {
                 cart:{...action.payload}
             }
@@ -34,6 +34,12 @@ export const cartReducers = (state=INITIAL_STATE, action) => {
             }
             break;
         case REMOVE_FROM_CART:
+            // console.log('remove to cart in', action.data)
+            return {
+                cart:{...action.payload}
+            }
+            break;
+        case CLEAR_CART:
             // console.log('remove to cart in', action.data)
             return {
                 cart:{...action.payload}

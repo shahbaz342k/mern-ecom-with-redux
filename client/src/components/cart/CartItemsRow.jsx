@@ -22,7 +22,7 @@ const CartItemsRow = (props) => {
       
       const qtyIncrement = (item, _id, updtype) => {
         // e.preventDefault()
-        console.log('increment id ', _id)
+        // console.log('increment id ', _id)
         setLoading(true)
         setLoadershow(true)
         dispatch(updateCartQuantity(item, _id, updtype));
@@ -36,7 +36,7 @@ const CartItemsRow = (props) => {
     
       // quantity decrement code 
       const qtyDecrement = (item,_id,updtype) => {
-          console.log('decrement id ', _id)
+          // console.log('decrement id ', _id)
           if( _id > 1 ){
             setLoadershow(true)
             setLoading(true)
@@ -78,7 +78,7 @@ const CartItemsRow = (props) => {
       // get quantity code
       const getQty = (_id) => {
         if( result.cart.items ){
-          console.log('get qty ', result)
+          // console.log('get qty ', result)
           return result.cart.items[_id];
         }
       }
@@ -94,7 +94,7 @@ const CartItemsRow = (props) => {
 
       // onchange event fuciton
       const handleChangeQty = (e) => {
-        console.log(e.target.value)
+        // console.log(e.target.value)
       }
   return (
     <>

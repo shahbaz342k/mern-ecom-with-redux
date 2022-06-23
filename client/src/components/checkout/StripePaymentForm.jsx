@@ -2,12 +2,18 @@ import React, { useState, useEffect } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { useNavigate } from "react-router-dom";
 import './stripeform.css'
+import { useDispatch, useSelector } from "react-redux";
+import { clearCart } from './../../redux/actions/cartActions';
 const StripePaymentForm = (props) => {
     const {totalPrice} = props;
     const [clientSecret, setClientSecret] = useState("");
     const stripe = useStripe();
     const elements = useElements();
     const navigate = useNavigate();
+    const result = useSelector((state) => state.cart);
+    const {user} = useSelector((state) => state.user);
+    // console.log(user)
+    const dispatch = useDispatch();
 
     // STEP 1: create a payment intent and getting the secret
     useEffect(() => {
@@ -34,8 +40,8 @@ const StripePaymentForm = (props) => {
                 card: elements.getElement(CardElement),
                 // hidePostalCode: true,
                 billing_details: {
-                    name: 'Josh Hasrena',
-                    email:'josh3@test.com',
+                    name:user.name,
+                    email:user.email,
                 },
             },
             // receipt_email: 'jhondoe@test.com',
@@ -48,7 +54,9 @@ const StripePaymentForm = (props) => {
             
             alert(`Order Placed`)
             // setCart([]);
-            window.localStorage.setItem('cart', 'null');
+            // window.localStorage.setItem('cart', 'null');
+            dispatch(clearCart())
+
             navigate('/thank-you',{state:{pyamentId:response.paymentIntent.payment_method}})
 		    // setProducts({})
         }

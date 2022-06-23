@@ -2,7 +2,7 @@
 // Action is used to send the data from action to reducer 
 // Thumb Rules : Must have type key in return statement
 // https://github.com/jalvaradoas39/restaurant-tutorial/blob/master/client/src/redux/actions/cartActions.js
-import { ADD_TO_CART, REMOVE_FROM_CART, UPDATE_CART_QUANTITY } from './../constants/cartConstants';
+import { ADD_TO_CART, CLEAR_CART, REMOVE_FROM_CART, UPDATE_CART_QUANTITY } from './../constants/cartConstants';
 
 
 export const addToCart = (product) => {
@@ -133,7 +133,7 @@ export const updateCartQuantity = (product, quantity, updType) => {
 
 export const removeFromCart = (product) => {
 
-      // if cart already exists in local storage, use it, otherwise set to empty array
+    // if cart already exists in local storage, use it, otherwise set to empty array
 	let cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
 
     // check if foundProduct
@@ -161,7 +161,7 @@ export const removeFromCart = (product) => {
         _cart.totalItems = _cart.totalItems - oldQty;
         cart = _cart;
         // add cart to local storage
-        localStorage.setItem('cart', JSON.stringify(cart));
+        window.localStorage.setItem('cart', JSON.stringify(cart));
     }
     
     return {
@@ -169,3 +169,20 @@ export const removeFromCart = (product) => {
         payload: cart
     }
 };
+
+export const clearCart = () =>{
+
+    // if cart already exists in local storage, use it, otherwise set to empty array
+	let cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
+    cart = {
+        items:{},
+        totalItems:0,
+    }
+    window.localStorage.setItem('cart', JSON.stringify(cart));
+    // window.localStorage.removeItem('cart');
+
+    return {
+        type: CLEAR_CART,
+        payload: cart
+    }
+}

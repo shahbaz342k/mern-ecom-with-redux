@@ -19,7 +19,7 @@ const AddToCart = (props) => {
     const {product} = props;
     return (
         <div className='addToCart'>
-            <button onClick={() => handleAddToCart(product)} className="btn btn-primary">{someAdding ? 'Adding' : 'Add to cart'}</button>
+            <button onClick={() => handleAddToCart(product)} disabled={someAdding ? 'disabled' : ''} className="btn btn-primary">{someAdding ? 'Adding' : 'Add to cart'}</button>
         {/* <button onClick={() => dispatch(removeToCart(product.id))}>Remove to cart</button> */}
         </div>
     )
