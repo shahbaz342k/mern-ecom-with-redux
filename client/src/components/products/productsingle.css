@@ -1,0 +1,28 @@
+.pImg {
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 5px;
+}
+#main-image{
+    width: 250px;
+}
+.brand {
+    font-size: 13px
+}
+
+.act-price {
+    color: red;
+    font-weight: 700
+}
+
+.dis-price {
+    text-decoration: line-through
+}
+
+.about {
+    font-size: 14px
+}
+
+.color {
+    margin-bottom: 10px
+}

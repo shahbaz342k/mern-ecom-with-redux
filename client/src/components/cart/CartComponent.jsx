@@ -86,7 +86,11 @@ const CartComponent = () => {
               {/* add map data here */}
               {loading ? 'loading...' : data.map((item) => <CartItemsRow item={item} key={item._id} />)}
 
-              <div className="back-to-shop"><a href="#">&leftarrow;</a><span className="text-muted">Back to shop</span></div>
+              <div className="back-to-shop">
+                <Link to='/'>
+                <span className="text-muted">Back to shop</span>
+                </Link>
+                </div>
             </div>
             <div className="col-md-4 summary">
               <div className="checkoutWrapper">

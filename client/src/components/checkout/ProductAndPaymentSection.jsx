@@ -50,43 +50,56 @@ const ProductAndPaymentSection = (props) => {
         // event.preventDefault();
         setLoader(true);
         // return;
-
-        console.log(paymentSelect)
-        if( paymentSelect == 'stripe' ){
-            
-            setTimeout( () => {
-                setLoader(false);
-                setModalOpen(true)
-                setShowPaymentForm(true)
-            }, 1000)
-            
+        // if( billingRes )
+        console.log(billingRes);
+        // return;
+        if( (billingRes.address == '' || billingRes.address == null) || 
+            (billingRes.country == '' || billingRes.country == null) ||
+            (billingRes.bstate == '' || billingRes.bstate == null) ||
+            (billingRes.zip == '' || billingRes.zip == null)
+        ){
+            alert('please fill required fileds ');
+            setLoader(false);
         }else{
-            setTimeout( () => {
-                setLoader(false);
-                // return;
-            
-               orderAdd('http://localhost:5000/api/order',{
-                    userId:user._id,
-                    paymentType:paymentSelect,
-                    paymentTotal:totalPrice,
-                    shippingPrice:5,
-                    shippingMethod:'Basic shipping',
-                    address1:billingRes.address,
-                    country:billingRes.country,
-                    state:billingRes.bstate,
-                    zip:billingRes.zip,
-                    products:convertCartProductsToArrOfObjects(result.cart)
-                });
-                // res1.then((res) => console.log('res1',res))
-                // console.log('res1 ', )
-                //return;
-                alert(`Order Placed`);
-                dispatch(clearCart())
-
-                // navigate('/thank-you',{state:{pyamentId:oid}})
-                navigate('/thank-you')
-            }, 1000)
+            console.log(paymentSelect)
+            if( paymentSelect == 'stripe' ){
+                
+                setTimeout( () => {
+                    setLoader(false);
+                    setModalOpen(true)
+                    setShowPaymentForm(true)
+                }, 1000)
+                
+            }else{
+                setTimeout( () => {
+                    setLoader(false);
+                    // return;
+                
+                   orderAdd('http://localhost:5000/api/order',{
+                        userId:user._id,
+                        paymentType:paymentSelect,
+                        paymentTotal:totalPrice,
+                        shippingPrice:5,
+                        shippingMethod:'Basic shipping',
+                        address1:billingRes.address,
+                        country:billingRes.country,
+                        state:billingRes.bstate,
+                        zip:billingRes.zip,
+                        products:convertCartProductsToArrOfObjects(result.cart)
+                    });
+                    // res1.then((res) => console.log('res1',res))
+                    // console.log('res1 ', )
+                    //return;
+    
+                    alert(`Order Placed`);
+                    dispatch(clearCart())
+    
+                    // navigate('/thank-you',{state:{pyamentId:oid}})
+                    navigate('/thank-you')
+                }, 1000)
+            }
         }
+       
     }
     const stripeSelect = () => {
         // console.log('stripe select')

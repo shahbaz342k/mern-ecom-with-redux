@@ -2,7 +2,8 @@ import { BILLING_DETAIL_FILLS } from "../constants/billingConstants";
 
 
 let INITIAL_STATE = {
-    billing_details:[]
+    billing_details:[],
+    billing_error:[]
 };
 
 export const billingReducers = (state=INITIAL_STATE, action) => {

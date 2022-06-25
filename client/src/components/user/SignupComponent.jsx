@@ -31,7 +31,7 @@ const SignupComponent = () => {
         console.log('file change')
         setFile(e.target.files[0]);
         setFileName(e.target.files[0].name);
-        console.log(e.target.files[0])
+        // console.log(e.target.files[0])
     }
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -52,7 +52,7 @@ const SignupComponent = () => {
             formData.append("email", userFormData.email)
             formData.append("password", userFormData.password)
             const res = await axios.post(REGISTERAPIURL, formData);
-            console.log(res.data.result)
+            // console.log(res.data.result)
             dispatch(registrationSuccess(res.data.result))
             // window.localStorage.setItem('user', JSON.stringify(res.data.result))
             navigate('/user/my-account')
@@ -63,7 +63,7 @@ const SignupComponent = () => {
 
     //
     const registerSubmit = () =>{
-        console.log(userFormData)
+        // console.log(userFormData)
         // call register function
         if( !userFormData.name ){
             setError('Please enter name')

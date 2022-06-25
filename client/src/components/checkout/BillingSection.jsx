@@ -96,7 +96,7 @@ const BillingSection = () => {
                 <input type="checkbox" className="form-check-input" id="save-info" />
                 <label className="form-check-label" for="save-info">Save this information for next time</label>
             </div> */}
-            <button onClick={(e) => handleSubmit(e)}>Add Adress</button>
+            {/* <button onClick={(e) => handleSubmit(e)}>Add Adress</button> */}
         </div>
     </div>
     </>

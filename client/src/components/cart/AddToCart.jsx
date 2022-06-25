@@ -8,7 +8,7 @@ const AddToCart = (props) => {
     const dispatch = useDispatch();
     const [someAdding, setSomeAdding] = useState(false);
     const handleAddToCart = (product) => {
-        console.log('adding click')
+        // console.log('adding click')
         setSomeAdding(true)
         dispatch(addToCart(product))
         setTimeout(() => {

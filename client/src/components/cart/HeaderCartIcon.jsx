@@ -7,9 +7,9 @@ import { cartCount } from '../Helper/cartHelper';
 function HeaderCartIcon() {
     
     const result = useSelector((state) => state.cart);
-    console.log('cart state ', result)
+    // console.log('cart state ', result)
     let itemCount = result.cart ? result.cart.totalItems : 0
-    console.log(' itemd count', itemCount)
+    // console.log(' itemd count', itemCount)
     
   return (
     <>
