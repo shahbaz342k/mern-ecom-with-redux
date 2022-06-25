@@ -6,19 +6,86 @@ import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 import './stripeform.css'
+import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { clearCart } from '../../redux/actions/cartActions';
+import { useNavigate } from 'react-router-dom';
+import { convertCartProductsToArrOfObjects } from '../Helper/common';
+import Loader from './../loader/Loader';
+import { useEffect } from 'react';
+import { userOrderSuccess } from '../../redux/actions/orderActions';
 
 const stripePromise = loadStripe('pk_test_rOAwtz1LVC9CERxJe7qwQCiF00IwAaM679');
 const ProductAndPaymentSection = (props) => {
     const [showPaymentForm, setShowPaymentForm] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
+    const [loader, setLoader] = useState(false);
 
     const [paymentSelect, setPaymentSelect] = useState('cod');
+
+    const result = useSelector((state) => state.cart);
+    const {user} = useSelector((state) => state.user);
+    const billingRes = useSelector((state) => state.billing_details);
+    const {totalPrice} = props;
+    const [oid, setOid] = useState('');
+    const dispatch = useDispatch();
+    const navigate  = useNavigate();
+
+    // order add api
+    const orderAdd = async (url, payload) => {
+        try {
+            const resp = await axios.post(url, payload);
+            // console.log(resp);
+            // setOid(resp.data.result.order._id);
+            dispatch(userOrderSuccess(resp.data.result.order));
+            // console.log(resp.data.result.order._id)
+            
+        } catch (err) {
+            console.log(err)
+            // dispatch(err.response.data.message);
+        }      
+    }
     
     const checkoutPyament = (event) => {
-        // alert(paymentSelect)
+        // event.preventDefault();
+        setLoader(true);
+        // return;
+
+        console.log(paymentSelect)
         if( paymentSelect == 'stripe' ){
-            setModalOpen(true)
-            setShowPaymentForm(true)
+            
+            setTimeout( () => {
+                setLoader(false);
+                setModalOpen(true)
+                setShowPaymentForm(true)
+            }, 1000)
+            
+        }else{
+            setTimeout( () => {
+                setLoader(false);
+                // return;
+            
+               orderAdd('http://localhost:5000/api/order',{
+                    userId:user._id,
+                    paymentType:paymentSelect,
+                    paymentTotal:totalPrice,
+                    shippingPrice:5,
+                    shippingMethod:'Basic shipping',
+                    address1:billingRes.address,
+                    country:billingRes.country,
+                    state:billingRes.bstate,
+                    zip:billingRes.zip,
+                    products:convertCartProductsToArrOfObjects(result.cart)
+                });
+                // res1.then((res) => console.log('res1',res))
+                // console.log('res1 ', )
+                //return;
+                alert(`Order Placed`);
+                dispatch(clearCart())
+
+                // navigate('/thank-you',{state:{pyamentId:oid}})
+                navigate('/thank-you')
+            }, 1000)
         }
     }
     const stripeSelect = () => {
@@ -29,6 +96,12 @@ const ProductAndPaymentSection = (props) => {
         setShowPaymentForm(false)
         setPaymentSelect('cod');
     }
+    // useEffect( () => {
+    //     console.log('cod select', paymentSelect);
+    //     console.log('stripe select', paymentSelect);
+    // },[])
+    
+  
   return (
     <>
       <div className="col-md-5 col-lg-4 order-md-last">
@@ -75,12 +148,12 @@ const ProductAndPaymentSection = (props) => {
             <hr className="my-4" />
             <div className="my-3">
                 <div className='form-check'>
-                    <input type="radio" name="pm" id="cod" className="form-check-input" onChange={(e) => codSelect(e)} />
-                    <label for="cod">COD</label>
+                    <input type="radio" name="pm" id="cod" checked={paymentSelect === 'cod' ? true:''} className="form-check-input" onChange={(e) => codSelect(e)} />
+                    <label htmlFor="cod">COD</label>
                 </div>
                 <div className='form-check'>
-                    <input type="radio" name="pm" id="stripe" className="form-check-input" onChange={(e) => stripeSelect(e)} />
-                    <label for="stripe">Stripe</label>
+                    <input type="radio" name="pm" id="stripe" checked={paymentSelect === 'stripe' ? true:''} className="form-check-input" onChange={(e) => stripeSelect(e)} />
+                    <label htmlFor="stripe">Stripe</label>
                 </div>
             </div>
 
@@ -114,7 +187,8 @@ const ProductAndPaymentSection = (props) => {
                     <StripePaymentForm totalPrice={props.totalPrice} />
                 </Elements>
             } */}
-        </div>  
+        </div>
+        {loader ? <Loader /> : ''}  
     </>
   )
 }

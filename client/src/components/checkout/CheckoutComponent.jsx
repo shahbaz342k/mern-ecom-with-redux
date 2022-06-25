@@ -5,7 +5,7 @@ import ProductAndPaymentSection from './ProductAndPaymentSection';
 
 const CheckoutComponent = () => {
    const location =  useLocation();
-   console.log(location)
+  //  console.log(location)
   return (
     <div>
         <div className="container">

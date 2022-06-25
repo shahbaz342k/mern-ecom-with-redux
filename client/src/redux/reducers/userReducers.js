@@ -16,7 +16,7 @@ export const userReducers = (state=INITIAL_STATE, action) => {
             }
             break;
         case LOGIN_SUCCESS:
-            console.log('login success: ',action);
+            // console.log('login success: ',action);
             return {...action.payload}
             break;
         case LOGIN_FAILURE:

@@ -8,6 +8,7 @@ const cors = require('cors');
 const Stripe = require('stripe');
 const  UserRoutes  = require('./routers/UserRoutes');
 const  ProductRoutes  = require('./routers/ProductRoutes');
+const  OrderRoutes  = require('./routers/OrderRoutes');
 const dbConnection = require('./db');
 const app = express()
 const port = process.env.PORT || 5001;
@@ -33,6 +34,7 @@ app.use('/uploads',express.static(path.join(__dirname,'/public/images')));
 // app.use(fileupload());
 app.use(`/api/`,UserRoutes);
 app.use(`/api/`,ProductRoutes);
+app.use(`/api/`,OrderRoutes);
 
 app.post("/create-payment-intent", async (req, res) => {
     const { price, description } = req.body;

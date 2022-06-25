@@ -4,13 +4,38 @@ import { useNavigate } from "react-router-dom";
 import './stripeform.css'
 import { useDispatch, useSelector } from "react-redux";
 import { clearCart } from './../../redux/actions/cartActions';
+import axios from 'axios';
+import { convertCartProductsToArrOfObjects } from "../Helper/common";
+import { userOrderSuccess } from './../../redux/actions/orderActions';
 const StripePaymentForm = (props) => {
+    
     const {totalPrice} = props;
     const [clientSecret, setClientSecret] = useState("");
     const stripe = useStripe();
     const elements = useElements();
     const navigate = useNavigate();
     const result = useSelector((state) => state.cart);
+    const billingRes = useSelector((state) => state.billing_details);
+    // convertCartProductsToArrOfObjects(result.cart)
+    // console.log('billing detal', billingRes)
+          
+    
+    /*
+
+
+        products = [
+            {
+                productId:'',
+                productQty:'',
+            },
+            {
+                productId:'',
+                productQty:'',
+            }
+            
+        ]
+    */
+
     const {user} = useSelector((state) => state.user);
     // console.log(user)
     const dispatch = useDispatch();
@@ -31,6 +56,16 @@ const StripePaymentForm = (props) => {
         });
     }, []);
 
+    const orderAdd = async (url, payload) => {
+        try {
+            const resp = await axios.post(url, payload);
+            // console.log(resp)
+            dispatch(userOrderSuccess(resp.data.result.order));
+        } catch (err) {
+            console.log(err)
+        }
+        
+    }
   
     // STEP 2: make the payment after filling the form properly
     const makePayment = async (e) => {
@@ -49,15 +84,31 @@ const StripePaymentForm = (props) => {
           
 
         });
-        console.log(response)
+        // console.log(response)
+
         if( response.paymentIntent.status === "succeeded" ){
             
-            alert(`Order Placed`)
+            // get all cart products and qty
+            
+
+            orderAdd('http://localhost:5000/api/order',{
+                userId:user._id,
+                paymentType:'online',
+                paymentTotal:totalPrice,
+                shippingPrice:5,
+                shippingMethod:'Basic shipping',
+                address1:billingRes.address,
+                country:billingRes.country,
+                state:billingRes.bstate,
+                zip:billingRes.zip,
+                products:convertCartProductsToArrOfObjects(result.cart)
+            })
+            alert(`Order Placed`);
             // setCart([]);
             // window.localStorage.setItem('cart', 'null');
             dispatch(clearCart())
 
-            navigate('/thank-you',{state:{pyamentId:response.paymentIntent.payment_method}})
+            navigate('/thank-you')
 		    // setProducts({})
         }
         

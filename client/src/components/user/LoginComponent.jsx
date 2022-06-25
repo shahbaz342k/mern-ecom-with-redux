@@ -8,18 +8,16 @@ import { loginFailure, loginStart, loginSuccess } from '../../redux/actions/user
 import { useNavigate } from 'react-router-dom';
 const baseApiUrl = process.env.REACT_APP_API_URL
 const LoginComponent = () => {
-    const LOGINAPIURL = `${baseApiUrl}/users/login`;
-    const [data, setData] = useState([]);
-    // const [loading, setLoading] = useState(false);
 
+    const LOGINAPIURL = `${baseApiUrl}/users/login`;
     const [errors, setErrors] = useState([]);
     const [rememberMe, setRememberMe] = useState(false);
     // console.log('url :',LOGINAPIURL);
     
-    const userRes = useSelector((state) => state.user);
+    // const userRes = useSelector((state) => state.user);
     
-    const {user,loading,error} = useSelector((state) => state.user);
-    console.log(userRes);
+    const {error} = useSelector((state) => state.user);
+    // console.log(userRes);
 
     const dispatch = useDispatch();
     const [credendials, setCredendials] = useState({
@@ -43,7 +41,11 @@ const LoginComponent = () => {
             // setData(res.data.result)
             dispatch( loginSuccess(res.data.result) )
             // setLoading(false)
-            
+            if( rememberMe ){
+                window.localStorage.setItem('rememberMeInfo', JSON.stringify({email:credendials.email, password:credendials.password}))
+            }else{
+                window.localStorage.removeItem('rememberMeInfo')
+            }
             navigate('/user/my-account');
         }catch(err){
             // console.log(err);
@@ -56,7 +58,7 @@ const LoginComponent = () => {
         e.preventDefault()
         setErrors(false)
         // console.log('login sumbmit')
-        console.log(credendials);
+        // console.log(credendials);
         // console.log('remember me',rememberMe)
         
         if( !credendials.email ){
@@ -64,13 +66,16 @@ const LoginComponent = () => {
         }else if( !credendials.password ){
             setErrors('password cannot be empty')
         }else{
+            // dispatch login start action
             dispatch(loginStart());
-            // here login api function call
-            if( rememberMe ){
-                window.localStorage.setItem('rememberMeInfo', JSON.stringify({email:credendials.email, password:credendials.password}))
-            }else{
+            
+            // check remember button
+            if( !rememberMe ){
+                setRememberMe(false)
                 window.localStorage.removeItem('rememberMeInfo')
             }
+
+             // here login api function call
             login();
                
         }
@@ -80,15 +85,23 @@ const LoginComponent = () => {
     useEffect( () => {
         setErrors(false)
         const rememberMeInfo = JSON.parse(window.localStorage.getItem('rememberMeInfo'));
+        // console.log('re', rememberMeInfo)
         if(rememberMeInfo){
-            credendials.email = rememberMeInfo.email;
-            credendials.password = rememberMeInfo.password;
+            setCredendials({
+                email : rememberMeInfo.email,
+                password : rememberMeInfo.password,
+            }) 
+            
             setRememberMe(true);
         }
         
     },[])
 
-    
+    useEffect( () => {
+        document.getElementById('email').value = credendials.email;
+        document.getElementById('password').value = credendials.password;
+        
+    },[credendials])   
 
 
   return (
@@ -97,11 +110,11 @@ const LoginComponent = () => {
     <main className="form-signin">
         <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
         <div className="form-floating mb-3">
-            <input type="email" className="form-control" id="email" onChange={ (e) =>  onChangeHandler(e) } placeholder="name@example.com" />
+            <input type="email" className="form-control"  id="email" onChange={ (e) =>  onChangeHandler(e) } placeholder="name@example.com" />
             <label htmlFor="floatingInput">Email address</label>
         </div>
         <div className="form-floating">
-            <input type="password" className="form-control" id="password" onChange={ (e) =>  onChangeHandler(e) } placeholder="Password" />
+            <input type="password" className="form-control"  id="password" onChange={ (e) =>  onChangeHandler(e) } placeholder="Password" />
             <label htmlFor="password">Password</label>
         </div>
         { errors ? <span className='err'>* {errors}</span> : '' }
