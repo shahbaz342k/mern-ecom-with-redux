@@ -58,7 +58,7 @@ const read = async (req, res, next) =>{
 
      
     try{
-        const orders = await Order.find();
+        const orders = await Order.find().sort({_id:-1});
         res.status(201).json({
             result:orders,
             success:true,

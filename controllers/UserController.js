@@ -98,7 +98,7 @@ const login = async ( req, res, next ) =>{
         const token = jwt.sign(
                         {data:{ id: user._id, isAdmin:user.isAdmin }}, 
                         process.env.JWT_SECRET,
-                        { expiresIn: '10 days' }
+                        { expiresIn: '30 days' }
                     );
 
         // finally return response
@@ -111,6 +111,7 @@ const login = async ( req, res, next ) =>{
         )
         .status(200).json({
             result:otherDetails,
+            token : token,
             success:true,  
         });
 

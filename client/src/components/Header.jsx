@@ -10,6 +10,7 @@ import SignUp from './../pages/user/SignUp';
 import MyAccount from './../pages/user/MyAccount';
 import Product from '../pages/Product'
 import NotFound from '../pages/NotFound'
+import Search from './search/Search'
 const Header = () => {
   return (
     

@@ -50,7 +50,7 @@ app.post("/create-payment-intent", async (req, res) => {
 
   });
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+app.listen(port, () => console.log(`Backend listening on port ${port}!`));
 
 // error middleware
 app.use((err,req,res,next) => {

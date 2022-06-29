@@ -14,6 +14,7 @@ import { convertCartProductsToArrOfObjects } from '../Helper/common';
 import Loader from './../loader/Loader';
 import { useEffect } from 'react';
 import { userOrderSuccess } from '../../redux/actions/orderActions';
+import ProductsCart from './ProductsCart';
 
 const stripePromise = loadStripe('pk_test_rOAwtz1LVC9CERxJe7qwQCiF00IwAaM679');
 const ProductAndPaymentSection = (props) => {
@@ -27,7 +28,6 @@ const ProductAndPaymentSection = (props) => {
     const {user} = useSelector((state) => state.user);
     const billingRes = useSelector((state) => state.billing_details);
     const {totalPrice} = props;
-    const [oid, setOid] = useState('');
     const dispatch = useDispatch();
     const navigate  = useNavigate();
 
@@ -123,26 +123,18 @@ const ProductAndPaymentSection = (props) => {
             <span className="badge bg-primary rounded-pill">{cartCount()}</span>
             </h4>
             <ul className="list-group mb-3">
-            <li className="list-group-item d-flex justify-content-between lh-sm">
-                <div>
-                <h6 className="my-0">Product name</h6>
-                <small className="text-muted">Brief description</small>
-                </div>
-                <span className="text-muted">$12</span>
-            </li>
-            
-            
-            <li className="list-group-item d-flex justify-content-between bg-light">
-                <div className="text-success">
-                <h6 className="my-0">Promo code</h6>
-                <small>EXAMPLECODE</small>
-                </div>
-                <span className="text-success">−$5</span>
-            </li>
-            <li className="list-group-item d-flex justify-content-between">
-                <span>Total (USD)</span>
-                <strong>${props.totalPrice}</strong>
-            </li>
+                <ProductsCart />
+                <li className="list-group-item d-flex justify-content-between bg-light">
+                    <div className="text-success">
+                    <h6 className="my-0">Promo code</h6>
+                    <small>EXAMPLECODE</small>
+                    </div>
+                    <span className="text-success">−$5</span>
+                </li>
+                <li className="list-group-item d-flex justify-content-between">
+                    <span>Total (USD)</span>
+                    <strong>${props.totalPrice}</strong>
+                </li>
             </ul>
 
             <div className="card p-2">

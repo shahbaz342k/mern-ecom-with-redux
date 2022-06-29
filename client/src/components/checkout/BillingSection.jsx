@@ -37,13 +37,13 @@ const BillingSection = () => {
             <div className="row g-3">
                 <div className="col-sm-12">
                     <label for="Name" className="form-label"> Name</label>
-                    <input type="text" className="form-control" id="Name" placeholder="" value={user.name} />
+                    <input type="text" className="form-control" id="Name" placeholder="" value={user ? user.name : ''} />
                     
                 </div>
 
                 <div className="col-12">
                     <label for="email" className="form-label">Email</label>
-                    <input type="email" className="form-control" id="email" value={user.email} />
+                    <input type="email" className="form-control" id="email" value={user ? user.email: ''} />
                     {/* <div className="invalid-feedback">Please enter a valid email address for shipping updates.</div> */}
                 </div>
 

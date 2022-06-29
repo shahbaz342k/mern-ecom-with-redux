@@ -5,6 +5,7 @@
 /.vscode
 /uploads
 /client/node_modules
+/client/.env
 /.pnp
 .pnp.js
 # testing

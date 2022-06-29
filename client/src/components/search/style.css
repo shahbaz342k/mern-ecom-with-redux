@@ -1,0 +1,43 @@
+.searchInput {
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    outline: none;
+}
+
+button.searchBtn {
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+}
+.serchRes {
+    position: absolute;
+    background: #f8f9fa;
+    width: 215px;
+    border-radius: 4px;
+    padding: 8px;
+    z-index: 10;
+}
+.border-btm{
+    border-bottom: 1px solid #cccccc73;
+}
+.prodList {
+    display: flex;
+    align-items: center;
+    padding-top: 10px;
+    font-family: sans-serif;
+}
+.prodListLink{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: inherit;
+}
+.prodImg{
+    width: 50px;
+}
+.prodList p{
+    margin-bottom: 0px;
+}

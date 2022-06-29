@@ -135,4 +135,40 @@ const productCart = async (req, res, next) => {
         })
 }
 
-module.exports = { add, read, update, destroy, destroyAll, productCart }
+const searchProduct = async (req, res, next) =>{
+    let query = req.params.query;
+    // res.send(query)
+
+    // for single regex
+    let regex = new RegExp( query, 'i') 
+    
+    try {
+        // for single field search query
+    //    let doc = await Product.find({title: regex}); 
+
+       // for multiple fields search query
+       let doc = await Product.find(
+        {
+            "$or":[
+                {"title": {$regex:query,$options:'i'}},
+                {"category": {$regex:query,$options:'i'}}
+            ]
+        }
+       ); 
+       if( doc.length == 0 ){
+        res.status(404).json({
+            success:false,
+            result:[],
+        })
+       }
+       res.status(200).json({
+            success:true,
+            count:doc.length,
+            result:doc
+       })
+    } catch (err) {
+        next(err)
+    }
+}
+
+module.exports = { add, read, update, destroy, destroyAll, productCart, searchProduct }

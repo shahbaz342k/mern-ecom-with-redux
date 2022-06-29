@@ -6,6 +6,7 @@ import HeaderCartIcon from './cart/HeaderCartIcon'
 import { useSelector } from 'react-redux';
 import HeaderUserMenu from './user/HeaderUserMenu'
 import { useEffect } from 'react';
+import Search from './search/Search';
 
 const Navbar = () => {
     const {user} = useSelector((state) => state.user);
@@ -30,6 +31,7 @@ const Navbar = () => {
                         <Link to='/cart' className="nav-link">Cart</Link>
                     </li>
                 </ul>
+                <Search />
                 <div className="d-flex justify-content-center align-items-center">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item mx-4">
