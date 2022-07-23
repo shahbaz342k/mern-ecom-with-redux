@@ -42,7 +42,7 @@ export const ProductsCart = () => {
    
     <>
      { data ? data.map( (item) => (
-        <li className="list-group-item d-flex justify-content-between lh-sm">
+        <li className="list-group-item d-flex justify-content-between lh-sm" key={item._id}>
             <div>
             <h6 className="my-0">{item.title}</h6>
             <small className="text-muted">category : <b>{item.category}, </b></small>

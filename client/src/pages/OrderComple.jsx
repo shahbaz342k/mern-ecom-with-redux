@@ -15,19 +15,10 @@ const OrderComplete = () => {
       <div className="wrapper-1">
         <div className="wrapper-2">
           <h1>Thank you !</h1>
-          <p>Thanks for order, Your order id <b>{order._id}</b>.  </p>
+          <p>Thanks for order, Your order id <b>{order._id}</b>.</p>
           <p>Our team will send you order invoice on email! </p>
-          <Link to='/'>
-          <button className="go-home">
-          go home
-          </button>
-          </Link>
+          <Link to='/'><button className="go-home">go home</button></Link>
         </div>
-        {/* <div className="footer-like">
-          <p>Email not received?
-          <a href="#">Click here to send again</a>
-          </p>
-        </div> */}
       </div>
     </div>
   )

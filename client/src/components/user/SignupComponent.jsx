@@ -11,7 +11,11 @@ const baseApiUrl = process.env.REACT_APP_API_URL
 
 const SignupComponent = () => {
 
-    const [errors, setErrors] = useState();
+    const [errors, setErrors] = useState({
+        nameErr:null,
+        emailErr:null,
+        passwordErr:null,
+    });
     const [userFormData, setUserFormData] = useState({
         name:null,
         email:null,
@@ -66,14 +70,14 @@ const SignupComponent = () => {
         // console.log(userFormData)
         // call register function
         if( !userFormData.name ){
-            setError('Please enter name')
+            setError( {nameErr: 'Please enter name'} )
         }else if( !userFormData.email ){
-            setError('Please enter email')
+            setError( {emailErr:'Please enter email'} )
         }else if( !userFormData.password ){
-            setError('Please enter password')
+            setError({passwordErr:'Please enter password'} )
         }else {
             if( userFormData.email && emailValidation(userFormData.email) ){
-                setError('Email is not valid') 
+                setError({emailErr:'Email is not valid'}) 
                 return;
             }else{
                 setError(false)
@@ -90,15 +94,17 @@ const SignupComponent = () => {
             <input type="name" className="form-control" id="name" onChange={ (e) =>  onChangeHandler(e) } placeholder="John Doe" />
             <label htmlFor="floatingInput">Name</label>
         </div>
+        { error.nameErr ? <span className='err'>* {error.nameErr}</span> : '' }
         <div className="form-floating mb-3">
             <input type="email" className="form-control" id="email" onChange={ (e) =>  onChangeHandler(e) } placeholder="name@example.com" />
             <label htmlFor="floatingInput">Email address</label>
         </div>
+        { error.emailErr ? <span className='err'>* {error.emailErr}</span> : '' }
         <div className="form-floating mb-3">
             <input type="password" className="form-control" id="password" onChange={ (e) =>  onChangeHandler(e) } placeholder="Password" />
             <label htmlFor="password">Password</label>
         </div>
-        { error ? <span className='err'>* {error}</span> : '' }
+        { error.passwordErr ? <span className='err'>* {error.passwordErr}</span> : '' }
         
         <div className='form-control mb-3' style={{
               textAlign: 'center',

@@ -9,53 +9,28 @@ export const addToCart = (product) => {
     // if cart already exists in local storage, use it, otherwise set to empty array
 	let cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
 
-    /* 
-    // check if duplicates
-	const duplicates = cart.filter(cartItem => cartItem._id === product._id);
-
-    // if no duplicates, proceed
-	if (duplicates.length === 0) {
-		// prep product data
-		const productToAdd = {
-			...product,
-			count: 1,
-		};
-
-		// add product data to cart
-		cart.push(productToAdd);
-
-		// add cart to local storage
-		localStorage.setItem('cart', JSON.stringify(cart));
-    */
-		
-
-
         let _cart = {...cart};
-        // check cart.items in cart object
-       if( ! _cart.items ){
-           _cart.items = {}
-       }
+            // check cart.items in cart object
+        if( ! _cart.items ){
+            _cart.items = {}
+        }
        
-       // check product _id already exist in cart items object
-       if( _cart.items[product._id]) {
-           // console.log('add plus 1 more',product._id)
-           _cart.items[product._id] += 1
-       }else{
-           _cart.items[product._id] = 1;
-           // console.log('add plus 1',_cart.items[product._id])
-       }
+        // check product _id already exist in cart items object
+        if( _cart.items[product._id]) {
+            // console.log('add plus 1 more',product._id)
+            _cart.items[product._id] += 1
+        }else{
+            _cart.items[product._id] = 1;
+            // console.log('add plus 1',_cart.items[product._id])
+        }
 
-       // check totl iems in cart object
-       if( !_cart.totalItems ){
-           _cart.totalItems = 0;
-       }
+        // check totl iems in cart object
+        if( !_cart.totalItems ){
+            _cart.totalItems = 0;
+        }
 
-       // increase totalitems by one 
-       _cart.totalItems +=1;
-       cart = _cart;
-
-    //    console.log(_cart)   
-       // add cart to local storage
+        _cart.totalItems +=1;
+        cart = _cart;
 		localStorage.setItem('cart', JSON.stringify(cart));
 
         return {

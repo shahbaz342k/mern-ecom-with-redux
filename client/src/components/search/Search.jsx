@@ -2,7 +2,7 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import './style.css'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 const baseAPIURL = process.env.REACT_APP_API_URL;
@@ -19,13 +19,21 @@ const Search = () => {
     const showResp = (e) => {
         e.preventDefault()
         // console.log('search btn click')
+        // console.log('searchText', searchText)
         if( searchText ){
-
-        
-        setIsShow(true);
-        searchApi()
+            setIsShow(true);
+            searchApi()
         }
-    } 
+    }
+    
+    const showRespOnChange = () => {
+        // e.preventDefault()
+        // console.log('search btn click')
+        if( searchText ){
+            setIsShow(true);
+            searchApi()
+        }
+    }
     const searchApi  = async () =>{
         setErorr(false);
         setData([]) 
@@ -48,18 +56,28 @@ const Search = () => {
         setIsShow(false);
         e.preventDefault();
         setSearchText(e.target.value);
+         
     }
+
+    // search product from debouncing concept
+    useEffect( () => {
+        let timer = setTimeout( () => {
+            console.log(searchText)
+            showRespOnChange()
+        }, 2000);
+        return () => clearInterval(timer)
+    }, [searchText])
 
     const removeAll = () => {
         setIsShow(false);
-        setSearchText('');
+        // setSearchText('');
         setData('')
 
     }
 
   return (
     <div className='searchBox'>
-        <form onSubmit={(e)=> showResp(e)}>
+        <form onSubmit={ (e) => showResp(e)}>
             <input type='text' className='searchInput' placeholder='Search here...' onChange={(e) => onChangeHandler(e) }/>
             <button className='searchBtn'><FontAwesomeIcon icon={faSearch} /></button>
         </form>
