@@ -11,6 +11,7 @@ import MyAccount from './../pages/user/MyAccount';
 import Product from '../pages/Product'
 import NotFound from '../pages/NotFound'
 import Search from './search/Search'
+import Products from '../pages/Products'
 const Header = () => {
   return (
     
@@ -19,6 +20,7 @@ const Header = () => {
         <Navbar />
             <Routes>
                 <Route path='/' exact element={<Home/>}></Route>
+                <Route path='/products' exact element={<Products/>}></Route>
                 <Route path='/product/:id' exact element={<Product/>}></Route>
                 <Route path='/user/login' exact element={<Login/>}></Route>
                 <Route path='/user/signup'  element={<SignUp/>}></Route>
