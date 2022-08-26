@@ -86,7 +86,7 @@ const Search = () => {
             {data ? data.map( (item) => (
                 <div className='prodList border-btm' key={item._id}>
                     <Link to={`/product/${item.slug}`} state={{id:item._id}} onClick={(e) => removeAll(e) } className="prodListLink anchorTag">
-                        <img src={item.image} alt="" className='prodImg'/>
+                        <img src={item.images[0]} alt="" className='prodImg'/>
                         <p>{item.title}</p>
                     </Link>
                 </div>

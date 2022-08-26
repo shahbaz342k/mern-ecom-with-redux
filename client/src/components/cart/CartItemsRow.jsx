@@ -104,7 +104,7 @@ const CartItemsRow = (props) => {
     
     <div className="row border-top border-bottom">
       <div className="row main align-items-center">
-        <div className="col-2"><img className="img-fluid" src={item.image} alt={item.title} /></div>
+        <div className="col-2"><img className="img-fluid" src={item.images[0]} alt={item.title} /></div>
         <div className="col">
             <div className="row text-muted">{item.title}</div>
             <div className="row">Cotton T-shirt</div>

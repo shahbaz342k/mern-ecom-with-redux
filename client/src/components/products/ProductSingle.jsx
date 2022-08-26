@@ -35,7 +35,7 @@ const ProductSingle = () => {
                                     <div className="images p-3">
                                         <div className="text-center p-4"> 
                                             {/* <img id="main-image" src="https://i.imgur.com/Dhebu4F.jpg" width="250" /> */}
-                                            <img id="main-image" src={data[0].image} alt={data[0].title} />
+                                            <img id="main-image" src={data[0].images[0]} alt={data[0].title} />
                                         </div>
                                         <div className="thumbnail text-center"> 
                                         {/* <img onclick="change_image(this)" src="https://i.imgur.com/Rx7uKd0.jpg" width="70" /> 
