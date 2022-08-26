@@ -1,0 +1,22 @@
+.headerTodo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .tFrm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .todoList {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px;
+    border-radius: 5px;
+    align-items: center;
+  }
+  .taskDone {
+    text-decoration: line-through;
+    color: greenyellow;
+  }
+  

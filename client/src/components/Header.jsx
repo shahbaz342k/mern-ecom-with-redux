@@ -12,6 +12,8 @@ import Product from '../pages/Product'
 import NotFound from '../pages/NotFound'
 import Search from './search/Search'
 import Products from '../pages/Products'
+import TodoList from './Todo/TodoList';
+import Todos from './Pagination/Todos'
 const Header = () => {
   return (
     
@@ -20,7 +22,7 @@ const Header = () => {
         <Navbar />
             <Routes>
                 <Route path='/' exact element={<Home/>}></Route>
-                <Route path='/products' exact element={<Products/>}></Route>
+                {/* <Route path='/products' exact element={<Products/>}></Route> */}
                 <Route path='/product/:id' exact element={<Product/>}></Route>
                 <Route path='/user/login' exact element={<Login/>}></Route>
                 <Route path='/user/signup'  element={<SignUp/>}></Route>
@@ -28,6 +30,8 @@ const Header = () => {
                 <Route path='/cart' element={<Cart/>}></Route>
                 <Route path='/checkout' element={<Checkout/>}></Route>
                 <Route path='/thank-you' element={<OrderComplete/>}></Route>
+                <Route path='/todo' element={<TodoList/>}></Route>
+                <Route path='/demoapi' element={<Todos />}></Route>
                 <Route path='*' element={<NotFound/>}></Route>
             </Routes>
         </BrowserRouter>        

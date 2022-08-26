@@ -2,6 +2,7 @@
 // Action is used to send the data from action to reducer 
 // Thumb Rules : Must have type key in return statement
 // https://github.com/jalvaradoas39/restaurant-tutorial/blob/master/client/src/redux/actions/cartActions.js
+
 import { ADD_TO_CART, CLEAR_CART, REMOVE_FROM_CART, UPDATE_CART_QUANTITY } from './../constants/cartConstants';
 
 

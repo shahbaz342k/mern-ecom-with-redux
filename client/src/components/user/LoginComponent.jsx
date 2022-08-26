@@ -37,8 +37,11 @@ const LoginComponent = () => {
          try{
             // setLoading(true)
             const res = await axios.post(LOGINAPIURL,credendials);
-            // console.log(res);
+            console.log(res);
             // setData(res.data.result)
+            let resData = {user:res.data.result};
+            // resData.userToken = res.data.token;
+            // resData.user = res.data.token;
             dispatch( loginSuccess(res.data.result) )
             // setLoading(false)
             if( rememberMe ){

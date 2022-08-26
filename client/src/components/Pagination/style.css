@@ -1,0 +1,7 @@
+.active{
+    color: rgb(197, 143, 143);
+    font-size: 20px;
+}
+.pagLink{
+    cursor: pointer;
+}

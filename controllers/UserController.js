@@ -103,7 +103,7 @@ const login = async ( req, res, next ) =>{
 
         // finally return response
         const {password, isAdmin, ...otherDetails} = user._doc;
-
+        otherDetails.token = token;
         return res.cookie(
             "access_token",token,{
                 httpOnly:true
@@ -111,7 +111,7 @@ const login = async ( req, res, next ) =>{
         )
         .status(200).json({
             result:otherDetails,
-            token : token,
+            // token : token,
             success:true,  
         });
 

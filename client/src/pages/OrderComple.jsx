@@ -9,7 +9,7 @@ const OrderComplete = () => {
     // const order = useSelector( (state) => state.order )
     const order = useSelector((state) => state.order);
 
-  console.log(order)
+  console.log('order :', order)
   return (
     <div className='content'>
       <div className="wrapper-1">

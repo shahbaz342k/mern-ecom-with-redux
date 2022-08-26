@@ -37,6 +37,14 @@ const Products = () => {
       
     },[test])
 
+    useEffect(() => {
+      // componentWillUnmount
+      return () => {
+         // Your code here
+      }
+    }, [test]);
+    
+
     return (
      
       <div>

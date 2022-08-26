@@ -1,6 +1,6 @@
 const express = require('express');
 const Router = express.Router();
-const { destroy, destroyAll, login, read, register, update, imgUpload } = require('../controllers/userController.js');
+const { destroy, destroyAll, login, read, register, update, imgUpload } = require('../controllers/UserController');
 const { upload } = require('../helper.js');
 // import { verifyAdmin, verifyToken, verifyUser } from './../utils/authentication.js';
 
